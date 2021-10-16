@@ -40,7 +40,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
-      - run: apk add curl
+      - run: apk add curl git
       - uses: reviewdog/action-setup@v1
       - uses: actions/checkout@v2
       - name: Run reviewdog
