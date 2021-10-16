@@ -33,8 +33,12 @@ jobs:
       - uses: reviewdog/action-actionlint@v1
 
   groovylint:
-    docker:
-      - image: nvuillam/npm-groovy-lint
+    runs-on: ubuntu-latest
+    container:
+      image: docker://nvuillam/npm-groovy-lint
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
       - uses: reviewdog/action-setup@v1
       - uses: actions/checkout@v2
