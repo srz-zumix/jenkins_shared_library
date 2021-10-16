@@ -31,3 +31,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-actionlint@v1
+
+  groovylint:
+    docker:
+      - image: nvuillam/npm-groovy-lint
+    steps:
+      - uses: reviewdog/action-setup@v1
+      - uses: actions/checkout@v2
+      - run: |
+          npm-groovy-lint
