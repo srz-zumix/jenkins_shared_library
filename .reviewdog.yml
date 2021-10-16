@@ -1,0 +1,9 @@
+runner:
+  npm-groovy-lint:
+    cmd: npm-groovy-lint # (required)
+    errorformat: # (optional if you use `format`)
+      - '%-P%f'
+      - '%*\s%l%*\s%tnfo%*\s%m'
+      - '%*\s%l%*\s%tarning%*\s%m'
+      - '%*\s%l%*\s%trror%*\s%m'
+      - '%-Q'
