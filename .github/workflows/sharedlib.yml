@@ -1,0 +1,39 @@
+name: Shared Library tests
+on:
+  pull_request:
+
+jobs:
+  sharedlib-test-official:
+    runs-on: ubuntu-latest
+    environment: dockerhub
+    services:
+      jenkins:
+        image: jenkins/jenkins:lts-jdk11
+        credentials:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        env:
+          # disable setup wizard + JCasC load
+          JAVA_OPTS: -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/jenkins_home/casc_configs
+        ports:
+          - 8080:8080
+          - 50000:50000
+    env:
+      JENKINS_URL: http://localhost:8080
+      TARGET_BRANCH: ${{ github.head_ref }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - uses: srz-zumix/setup-service-jenkins@main
+        with:
+          id: "${{ job.services.jenkins.id }}"
+          # offical image をセットアップウィザードスキップで起動するとプラグインが空なのでインストールする
+          install_suggested_plugins: true
+          # テスト用に jobDSL Plugin を追加
+          plugins: job-dsl
+          jcasc_path: tests
+      - run: |
+          jenkins-cli-groovyfile
+

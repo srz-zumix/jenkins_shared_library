@@ -24,6 +24,6 @@ szCreateQRCode( Map params = [:], contents, path)
 
 ```groovy
 steps {
-    szCreateQRCode("https://github.com/srz-zumix/jenkins_shared_library", 'qrcode.png', widht: 200, height: 200)
+  szCreateQRCode("https://github.com/srz-zumix/jenkins_shared_library", 'qrcode.png', widht: 200, height: 200)
 }
 ```
