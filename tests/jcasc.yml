@@ -14,4 +14,4 @@ unclassified:
               - discoverOtherRefsTrait:
                   ref: "pull/*"
 jobs:
-  - file: /var/jenkins_home/casc_configs/tests/szCreateQRCode/job.groovy
+  - file: /var/jenkins_home/casc_configs/szCreateQRCode/job.groovy
