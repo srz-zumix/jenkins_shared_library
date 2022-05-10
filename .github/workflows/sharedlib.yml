@@ -35,8 +35,6 @@ jobs:
           plugins: job-dsl
           jcasc_path: tests
       - run: |
-          jenkins-cli-groovyfile
-      - run: |
           jenkins-cli list-jobs
       - run: |
           jenkins-cli build 'Test_szCreateQRCode'
