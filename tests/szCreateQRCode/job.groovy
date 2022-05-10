@@ -1,4 +1,4 @@
-job('Test_szCreateQRCode') {
+pipelineJob('Test_szCreateQRCode') {
   definition {
     cps {
         sandbox(true)
