@@ -8,7 +8,7 @@ unclassified:
           scm:
             git:
               id: ""
-              remote: "git@github.com:srz-zumix/jenkins_shared_library.git"
+              remote: "https://github.com/srz-zumix/setup-service-jenkins.git"
               traits:
               - "gitBranchDiscovery"
               - discoverOtherRefsTrait:
