@@ -37,5 +37,7 @@ jobs:
       - run: |
           jenkins-cli list-jobs
       - run: |
-          jenkins-cli build 'Test_szCreateQRCode'
+          jenkins-cli-groovy 'jenkins.model.Jenkins.get().computers.each { println it.displayName }'
+      - run: |
+          jenkins-cli build 'Test_szCreateQRCode' -s
 
