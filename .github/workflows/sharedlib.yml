@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - uses: srz-zumix/setup-service-jenkins@main
+      - uses: srz-zumix/setup-service-jenkins@feature/build-log
         with:
           id: "${{ job.services.jenkins.id }}"
           # offical image をセットアップウィザードスキップで起動するとプラグインが空なのでインストールする
@@ -40,4 +40,8 @@ jobs:
           jenkins-cli-groovy 'jenkins.model.Jenkins.get().computers.each { println it.displayName }'
       - run: |
           jenkins-cli build 'Test_szCreateQRCode' -s
+      - run: |
+          jenkins-build-log Test_szCreateQRCode
+        if: success() || failure()
+
 
