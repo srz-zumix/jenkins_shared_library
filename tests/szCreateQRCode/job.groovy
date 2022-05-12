@@ -3,7 +3,7 @@ pipelineJob('Test_szCreateQRCode') {
     cps {
         sandbox(true)
         script("""
-@Library('srz-zumix-shared-library') _
+@Library('srz-zumix-shared-library@main') _
 
 pipeline {
   agent any

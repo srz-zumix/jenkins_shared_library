@@ -26,6 +26,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - name: Replace SharedLibrary branch
+        run: |
+          find tests -name "*.groovy" | xargs sed -i -e 's/srz-zumix-shared-library@main/srz-zumix-shared-library@${TARGET_BRANCH}/g'
       - uses: srz-zumix/setup-service-jenkins@feature/build-log
         with:
           id: "${{ job.services.jenkins.id }}"
