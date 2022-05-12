@@ -29,7 +29,7 @@ jobs:
       - name: Replace SharedLibrary branch
         run: |
           find tests -name "*.groovy" | xargs sed -i -e "s|srz-zumix-shared-library@main|srz-zumix-shared-library@${TARGET_BRANCH}|g"
-      - uses: srz-zumix/setup-service-jenkins@feature/build-log
+      - uses: srz-zumix/setup-service-jenkins@feature/download_artifact
         with:
           id: "${{ job.services.jenkins.id }}"
           # offical image をセットアップウィザードスキップで起動するとプラグインが空なのでインストールする
@@ -43,6 +43,12 @@ jobs:
           jenkins-cli-groovy 'jenkins.model.Jenkins.get().computers.each { println it.displayName }'
       - run: |
           jenkins-cli build 'Test_szCreateQRCode' -s
+      - run: |
+          jenkins-download-artifact Test_szCreateQRCode qrcode.png
+      - uses: actions/upload-artifact@v2
+        with:
+          name: test-result
+          path: qrcode.png
       - run: |
           jenkins-build-log Test_szCreateQRCode
         if: success() || failure()
