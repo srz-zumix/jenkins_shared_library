@@ -3,6 +3,9 @@ MD013:
   # Number of characters
   line_length: 120
   # Number of characters for headings
-  heading_line_length: 80
+  heading_line_length: 120
   # Number of characters for code blocks
   code_block_line_length: 120
+# MD043/Required heading structure
+MD043:
+  required-headers": false
