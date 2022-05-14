@@ -1,0 +1,1 @@
+<a href="https://srz-zumix.github.io/jenkins_shared_library/szCreateQRCode.md" target="_blank" rel="noopener noreferrer">Reference</a>

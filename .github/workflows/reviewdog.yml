@@ -1,0 +1,50 @@
+name: reviewdog
+on:
+  pull_request:
+
+jobs:
+
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: markdownlint
+        uses: reviewdog/action-markdownlint@v0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-shellcheck@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          path: "."
+          pattern: "*.sh"
+          exclude: "./.git/*"
+
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-actionlint@v1
+
+  groovylint:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://nvuillam/npm-groovy-lint
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    steps:
+      - run: apk add curl git
+      - uses: reviewdog/action-setup@v1
+      - uses: actions/checkout@v2
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          reviewdog -reporter=github-pr-review -runners=npm-groovy-lint

@@ -1,0 +1,17 @@
+unclassified:
+  globalLibraries:
+    libraries:
+    - defaultVersion: "main"
+      name: "srz-zumix-shared-library"
+      retriever:
+        modernSCM:
+          scm:
+            git:
+              id: ""
+              remote: "https://github.com/srz-zumix/jenkins_shared_library.git"
+              traits:
+              - "gitBranchDiscovery"
+              - discoverOtherRefsTrait:
+                  ref: "pull/*"
+jobs:
+  - file: /var/jenkins_home/casc_configs/szCreateQRCode/job.groovy
